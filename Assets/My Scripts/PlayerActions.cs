@@ -6,13 +6,15 @@ public class PlayerActions : MonoBehaviour {
 
     // Movement Variables
     public float speed;
+    public float holdDownTime;
+    public float throwForce;
     public CharacterController player;
     // variables for pick up and throw
     public Transform playerPos;
     public Transform playerCam;
     //whether the item is carried by player
     bool nearPlayer = false;
-    bool carried = false;
+    bool beingCarried = false;
     public int cardCount;
     public bool touched = false;
 
@@ -27,8 +29,9 @@ public class PlayerActions : MonoBehaviour {
 	
 	void Update () {
         CharacterMove();
-        PickUpnThrow();
+        //PickUpnThrow();
         CameraLook();
+        
 
 
         //if (Input.GetMouseButtonDown(1))
@@ -56,25 +59,16 @@ public class PlayerActions : MonoBehaviour {
 
     }
 
-    void PickUpnThrow()
-    {
-        //distance between player and card to throw
-        float distance = Vector3.Distance(gameObject.transform.position, playerPos.position);
-        if (distance <= 2.5)
-        {
-            nearPlayer = true;
-        }
-        
-        if (nearPlayer = true && Input.GetButtonDown("Fire1"))
-        {
-            GetComponent<Rigidbody>().isKinematic = true;
-            transform.parent = playerCam;
-            //transform.rotation = 
-        }
-     
 
 
-            
 
-    }
+
+
+
+
+
 }
+
+
+   
+
