@@ -8,7 +8,7 @@ public class CardBehavoir : MonoBehaviour
     public float speed;
     public float holdDownTime;
     public float throwForce;
-    public CharacterController player;
+    //public CharacterController player;
     // variables for pick up and throw
     public Transform playerPos;
     public Transform playerCam;

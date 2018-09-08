@@ -9,11 +9,11 @@ public class PlayerActions : MonoBehaviour {
     public float holdDownTime;
     public float throwForce;
     public CharacterController player;
-    // variables for pick up and throw
+    //variables for pick up and throw
     public Transform playerPos;
     public Transform playerCam;
     //whether the item is carried by player
-    bool nearPlayer = false;
+    public bool nearPlayer = false;
     bool beingCarried = false;
     public int cardCount;
     public bool touched = false;
@@ -29,25 +29,35 @@ public class PlayerActions : MonoBehaviour {
 	
 	void Update () {
         CharacterMove();
-        //PickUpnThrow();
+        PickUpnThrow();
         CameraLook();
-        
+
+        //distance between player and card
+        float distance = Vector3.Distance(gameObject.transform.position, playerPos.position);
+        if (distance <= 2.5f)
+        {
+            nearPlayer = true;
+        }
+        else nearPlayer = false;
+
 
 
         //if (Input.GetMouseButtonDown(1))
         //{
-            
+
         //}
-	}
+    }
 
     void CameraLook() {
+
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
-
+        
         Vector3 rotation = cameraMovement.eulerAngles;
-        rotation.x += -mouseY;
+                    rotation.x += -mouseY;
         rotation.y += mouseX;
         cameraMovement.eulerAngles = rotation;
+        
     }
 
     void CharacterMove()
@@ -59,6 +69,42 @@ public class PlayerActions : MonoBehaviour {
 
     }
 
+    void PickUpnThrow()
+    {
+        
+
+
+        if (nearPlayer = true && Input.GetButtonDown("Use"))
+        {
+            GetComponent<Rigidbody>().isKinematic = true;
+            transform.parent = playerCam;
+            beingCarried = true;
+            //transform.rotation = 
+        }
+        if (beingCarried)
+        {
+            if (touched)
+            {
+                GetComponent<Rigidbody>().isKinematic = false;
+                transform.parent = null;
+                beingCarried = false;
+                touched = false;
+
+            }
+            if (Input.GetMouseButtonDown(0))
+            {
+                //CalculateThrowForce();
+
+                GetComponent<Rigidbody>().isKinematic = false;
+                transform.parent = null;
+                beingCarried = false;
+                GetComponent<Rigidbody>().AddForce(playerCam.forward * throwForce);
+            }
+
+        }
+
+
+    }
 
 
 
