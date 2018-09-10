@@ -17,6 +17,7 @@ public class PlayerActions : MonoBehaviour {
     bool beingCarried = false;
     public int cardCount;
     public bool touched = false;
+    
 
     public Transform cameraMovement;
 

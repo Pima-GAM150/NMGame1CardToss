@@ -8,6 +8,7 @@ public class CardBehavoir : MonoBehaviour
     public float speed;
     public float holdDownTime;
     public float throwForce;
+    public Rigidbody cardBody;
     //public CharacterController player;
     // variables for pick up and throw
     public Transform playerPos;
@@ -22,6 +23,7 @@ public class CardBehavoir : MonoBehaviour
 
     void Start()
     {
+        cardBody = GetComponent<Rigidbody>();
 
     }
 
@@ -46,11 +48,13 @@ public class CardBehavoir : MonoBehaviour
         {
             GetComponent<Rigidbody>().isKinematic = true;
             transform.parent = playerCam;
+
             beingCarried = true;
             //transform.rotation = 
         }
         if (beingCarried)
         {
+            //this drops the item if it comes in contact with another item.
             if (touched)
             {
                 GetComponent<Rigidbody>().isKinematic = false;
@@ -61,9 +65,9 @@ public class CardBehavoir : MonoBehaviour
             }
             if (Input.GetMouseButtonDown(0))
             {
-                CalculateThrowForce();
-            }
-            if (Input.GetMouseButtonUp(0)) { 
+            //    CalculateThrowForce();
+            //}
+            //if (Input.GetMouseButtonUp(0)) { 
                 GetComponent<Rigidbody>().isKinematic = false;
                 transform.parent = null;
                 beingCarried = false;
@@ -74,16 +78,20 @@ public class CardBehavoir : MonoBehaviour
 
 
     }
-    void CalculateThrowForce()
-    {
-        holdDownTime += Time.deltaTime;
-        throwForce *= holdDownTime;
-    }
+    //void CalculateThrowForce()
+    //{
+    //    holdDownTime += Time.deltaTime;
+    //    throwForce *= holdDownTime;
+
+    //}
     private void OnTriggerEnter()
     {
+        
         if (beingCarried)
         {
             touched = true;
+            
+
         }
     }
 }
