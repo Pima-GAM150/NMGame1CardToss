@@ -62,7 +62,8 @@ public class CardBehavoir : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 CalculateThrowForce();
-
+            }
+            if (Input.GetMouseButtonUp(0)) { 
                 GetComponent<Rigidbody>().isKinematic = false;
                 transform.parent = null;
                 beingCarried = false;
