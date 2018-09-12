@@ -15,8 +15,9 @@ public class Target : MonoBehaviour {
 	void Update () {
 		
 	}
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
-        cardBody.constraints = RigidbodyConstraints.FreezeAll;
+        
+        cardBody.constraints = RigidbodyConstraints.FreezePosition;
     }
 }

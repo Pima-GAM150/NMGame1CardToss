@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerActions : MonoBehaviour {
+public class PlayerActions : MonoBehaviour
+{
 
     // Movement Variables
     public float speed;
@@ -17,29 +18,31 @@ public class PlayerActions : MonoBehaviour {
     bool beingCarried = false;
     public int cardCount;
     public bool touched = false;
-    
+
 
     public Transform cameraMovement;
 
 
 
-	void Start () {
-		
-	}
-	
-	
-	void Update () {
+    void Start()
+    {
+
+    }
+
+
+    void Update()
+    {
         CharacterMove();
         PickUpnThrow();
         CameraLook();
 
         //distance between player and card
-        float distance = Vector3.Distance(gameObject.transform.position, playerPos.position);
-        if (distance <= 2.5f)
-        {
-            nearPlayer = true;
-        }
-        else nearPlayer = false;
+        //float distance = Vector3.Distance(gameObject.transform.position, playerPos.position);
+        //if (distance <= 2.5f)
+        //{
+        //    nearPlayer = true;
+        //}
+        //else nearPlayer = false;
 
 
 
@@ -49,16 +52,17 @@ public class PlayerActions : MonoBehaviour {
         //}
     }
 
-    void CameraLook() {
+    void CameraLook()
+    {
 
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
-        
+
         Vector3 rotation = cameraMovement.eulerAngles;
-                    rotation.x += -mouseY;
+        rotation.x += -mouseY;
         rotation.y += mouseX;
         cameraMovement.eulerAngles = rotation;
-        
+
     }
 
     void CharacterMove()
@@ -72,7 +76,7 @@ public class PlayerActions : MonoBehaviour {
 
     void PickUpnThrow()
     {
-        
+
 
 
         if (nearPlayer = true && Input.GetButtonDown("Use"))
@@ -106,15 +110,16 @@ public class PlayerActions : MonoBehaviour {
 
 
     }
-
-
-
-
-
-
-
-
 }
+
+
+
+
+
+
+
+
+
 
 
    

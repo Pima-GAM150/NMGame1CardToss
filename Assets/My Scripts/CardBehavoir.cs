@@ -8,17 +8,21 @@ public class CardBehavoir : MonoBehaviour
     public float speed;
     public float holdDownTime;
     public float throwForce;
+    public float throwTorque;
+
     public Rigidbody cardBody;
+
     //public CharacterController player;
     // variables for pick up and throw
     public Transform playerPos;
+    public Vector3 playerInteractRange;
     public Transform playerCam;
+    //public Quaternion cardRot;
     //whether the item is carried by player
     bool nearPlayer = false;
     bool beingCarried = false;
     public int cardCount;
     public bool touched = false;
-
 
 
     void Start()
@@ -36,8 +40,8 @@ public class CardBehavoir : MonoBehaviour
     void PickUpnThrow()
     {
         //distance between player and card to throw
-        float distance = Vector3.Distance(gameObject.transform.position, playerPos.position);
-        if (distance <= 2.5)
+        float distance = Vector3.Distance(cardBody.position, playerPos.position);
+        if (distance <= 2.5f)
         {
             nearPlayer = true;
         }
@@ -48,9 +52,12 @@ public class CardBehavoir : MonoBehaviour
         {
             GetComponent<Rigidbody>().isKinematic = true;
             transform.parent = playerCam;
+            transform.localPosition = new Vector3(0f, -.25f, .5f);
+            transform.localRotation = new Quaternion(-90f, 0f, 0f, 90f);
 
             beingCarried = true;
-            //transform.rotation = 
+            cardBody.constraints = RigidbodyConstraints.None;
+
         }
         if (beingCarried)
         {
@@ -65,14 +72,19 @@ public class CardBehavoir : MonoBehaviour
             }
             if (Input.GetMouseButtonDown(0))
             {
-            //    CalculateThrowForce();
-            //}
-            //if (Input.GetMouseButtonUp(0)) { 
-                GetComponent<Rigidbody>().isKinematic = false;
-                transform.parent = null;
-                beingCarried = false;
-                GetComponent<Rigidbody>().AddForce(playerCam.forward * throwForce);
+                
+                //    CalculateThrowForce();
+                //}
+                //if (Input.GetMouseButtonUp(0))
+                {
+                    GetComponent<Rigidbody>().isKinematic = false;
+                    transform.parent = null;
+                    beingCarried = false;
+                    GetComponent<Rigidbody>().AddForce(playerCam.forward * throwForce);
+                    GetComponent<Rigidbody>().AddTorque(transform.forward * throwTorque);
+                }
             }
+
 
         }
 
@@ -80,18 +92,26 @@ public class CardBehavoir : MonoBehaviour
     }
     //void CalculateThrowForce()
     //{
-    //    holdDownTime += Time.deltaTime;
+     
     //    throwForce *= holdDownTime;
 
     //}
-    private void OnTriggerEnter()
+    private void OnTriggerEnter(Collider CardStick)
     {
-        
-        if (beingCarried)
+        if (CardStick.gameObject.tag == "Target")
         {
-            touched = true;
-            
+            cardBody.constraints = RigidbodyConstraints.FreezeAll;
+            if (beingCarried)
+            {
+                touched = true;
 
+                cardBody.constraints = RigidbodyConstraints.FreezeAll;
+
+
+            }
         }
     }
+
+    
+   
 }
