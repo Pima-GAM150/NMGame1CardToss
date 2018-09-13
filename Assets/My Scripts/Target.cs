@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Target : MonoBehaviour {
 
-    Rigidbody cardBody;
+    Rigidbody stuckItem;
 
 	// Use this for initialization
 	void Start () {
@@ -18,6 +18,7 @@ public class Target : MonoBehaviour {
     void OnTriggerEnter(Collider other)
     {
         
-        cardBody.constraints = RigidbodyConstraints.FreezePosition;
+        
+        stuckItem.constraints = RigidbodyConstraints.FreezePosition;
     }
 }

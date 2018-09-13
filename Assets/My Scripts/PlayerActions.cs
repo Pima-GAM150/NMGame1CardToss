@@ -26,23 +26,24 @@ public class PlayerActions : MonoBehaviour
 
     void Start()
     {
-
+        nearPlayer = false;
     }
 
 
     void Update()
     {
+
         CharacterMove();
         PickUpnThrow();
         CameraLook();
 
         //distance between player and card
-        //float distance = Vector3.Distance(gameObject.transform.position, playerPos.position);
-        //if (distance <= 2.5f)
-        //{
-        //    nearPlayer = true;
-        //}
-        //else nearPlayer = false;
+        float distance = Vector3.Distance(gameObject.transform.position, playerPos.position);
+        if (distance <= 2.5f)
+        {
+            nearPlayer = true;
+        }
+        else nearPlayer = false;
 
 
 

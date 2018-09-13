@@ -9,6 +9,13 @@ public class CardBehavoir : MonoBehaviour
     public float holdDownTime;
     public float throwForce;
     public float throwTorque;
+    public float objectDistance;
+    public float windAffect;
+
+    public float beingCarriedRotationX;
+    public float beingCarriedRotationY;
+    public float beingCarriedRotationZ;
+    public float beingCarriedRotationW;
 
     public Rigidbody cardBody;
 
@@ -25,9 +32,11 @@ public class CardBehavoir : MonoBehaviour
     public bool touched = false;
 
 
+
     void Start()
     {
         cardBody = GetComponent<Rigidbody>();
+
 
     }
 
@@ -37,11 +46,22 @@ public class CardBehavoir : MonoBehaviour
         PickUpnThrow();
     }
 
-    void PickUpnThrow()
+    void objectDistanceCheck()
     {
         //distance between player and card to throw
-        float distance = Vector3.Distance(cardBody.position, playerPos.position);
-        if (distance <= 2.5f)
+       objectDistance = Vector3.Distance(cardBody.position, playerPos.position);
+    }
+
+
+
+    void PickUpnThrow()
+    {
+        objectDistanceCheck();
+        //distance between player and card to throw
+        //float distance = Vector3.Distance(cardBody.position, playerPos.position);
+
+        if (objectDistance < 2.5f)
+
         {
             nearPlayer = true;
         }
@@ -52,8 +72,9 @@ public class CardBehavoir : MonoBehaviour
         {
             GetComponent<Rigidbody>().isKinematic = true;
             transform.parent = playerCam;
+            
             transform.localPosition = new Vector3(0f, -.25f, .5f);
-            transform.localRotation = new Quaternion(-90f, 0f, 0f, 90f);
+            transform.localRotation = new Quaternion(beingCarriedRotationX, beingCarriedRotationY, beingCarriedRotationZ, beingCarriedRotationW);
 
             beingCarried = true;
             cardBody.constraints = RigidbodyConstraints.None;
@@ -80,8 +101,12 @@ public class CardBehavoir : MonoBehaviour
                     GetComponent<Rigidbody>().isKinematic = false;
                     transform.parent = null;
                     beingCarried = false;
+                    //the throwing calculation
                     GetComponent<Rigidbody>().AddForce(playerCam.forward * throwForce);
                     GetComponent<Rigidbody>().AddTorque(transform.forward * throwTorque);
+                    //the wind affect calculation
+                    GetComponent<Rigidbody>().AddForce(playerCam.forward * throwForce);
+                    GetComponent<Rigidbody>().AddTorque(transform.up * 1);
                 }
             }
 
