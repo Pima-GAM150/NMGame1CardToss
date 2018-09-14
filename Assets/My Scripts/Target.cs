@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Target : MonoBehaviour {
 
-    Rigidbody stuckItem;
+    //Rigidbody stuckItem;
 
 	// Use this for initialization
 	void Start () {
@@ -19,6 +19,6 @@ public class Target : MonoBehaviour {
     {
         
         
-        stuckItem.constraints = RigidbodyConstraints.FreezePosition;
+        //stuckItem.constraints = RigidbodyConstraints.FreezePosition;
     }
 }

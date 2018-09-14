@@ -18,8 +18,8 @@ public class PlayerActions : MonoBehaviour
     bool beingCarried = false;
     public int cardCount;
     public bool touched = false;
-
-
+    
+    public GameObject itemToThrow;
     public Transform cameraMovement;
 
 
@@ -27,6 +27,8 @@ public class PlayerActions : MonoBehaviour
     void Start()
     {
         nearPlayer = false;
+
+        
     }
 
 
@@ -34,25 +36,27 @@ public class PlayerActions : MonoBehaviour
     {
 
         CharacterMove();
-        PickUpnThrow();
+        //PickUpnThrow();
         CameraLook();
-
-        //distance between player and card
-        float distance = Vector3.Distance(gameObject.transform.position, playerPos.position);
-        if (distance <= 2.5f)
-        {
-            nearPlayer = true;
-        }
-        else nearPlayer = false;
-
-
-
-        //if (Input.GetMouseButtonDown(1))
-        //{
-
-        //}
+        ItemDistance();
     }
 
+        void ItemDistance()
+        {
+
+            //distance between player and card
+            float distance = Vector3.Distance(gameObject.transform.position, playerPos.position);
+        if (distance <= 2.5f)
+        {
+
+            nearPlayer = true;
+        }
+        else
+        {
+            nearPlayer = false;
+        }
+        }
+          
     void CameraLook()
     {
 
@@ -75,42 +79,47 @@ public class PlayerActions : MonoBehaviour
 
     }
 
-    void PickUpnThrow()
-    {
+    //void PickUpnThrow()
+    //{
 
 
 
-        if (nearPlayer = true && Input.GetButtonDown("Use"))
-        {
-            GetComponent<Rigidbody>().isKinematic = true;
-            transform.parent = playerCam;
-            beingCarried = true;
-            //transform.rotation = 
-        }
-        if (beingCarried)
-        {
-            if (touched)
-            {
-                GetComponent<Rigidbody>().isKinematic = false;
-                transform.parent = null;
-                beingCarried = false;
-                touched = false;
+    //    if (nearPlayer && Input.GetButtonDown("Use"))
+    //    {
+    //        GetComponent<Rigidbody>().isKinematic = true;
+    //        transform.parent = playerCam;
+    //        beingCarried = true;
 
-            }
-            if (Input.GetMouseButtonDown(0))
-            {
-                //CalculateThrowForce();
+    //    }
+    //    if (beingCarried)
+    //    {
+    //        if (touched)
+    //        {
+    //            GetComponent<Rigidbody>().isKinematic = false;
+    //            transform.parent = null;
+    //            beingCarried = false;
+    //            touched = false;
 
-                GetComponent<Rigidbody>().isKinematic = false;
-                transform.parent = null;
-                beingCarried = false;
-                GetComponent<Rigidbody>().AddForce(playerCam.forward * throwForce);
-            }
+    //        }
+    //        if (Input.GetMouseButtonDown(0))
+    //        {
+                
+    //            GetComponent<Rigidbody>().isKinematic = false;
+    //            transform.parent = null;
+    //            beingCarried = false;
+    //            GetComponent<Rigidbody>().AddForce(playerCam.forward * throwForce);
+    //        }
+    //        else if (Input.GetMouseButtonDown(1))
+    //        {
+    //            GetComponent<Rigidbody>().isKinematic = false;
+    //            transform.parent = null;
+    //            beingCarried = false;
+    //        }
 
-        }
+    //    }
 
 
-    }
+    //}
 }
 
 
@@ -123,5 +132,5 @@ public class PlayerActions : MonoBehaviour
 
 
 
-   
+
 

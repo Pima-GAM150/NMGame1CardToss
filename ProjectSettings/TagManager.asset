@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Card
   - Target
+  - Throwable
   layers:
   - Default
   - TransparentFX

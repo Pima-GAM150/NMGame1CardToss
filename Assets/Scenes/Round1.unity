@@ -160,6 +160,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4181108269398010, guid: d5aeb9c866c9c56428af104ef949e9ca, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5aeb9c866c9c56428af104ef949e9ca, type: 2}
   m_IsPrefabAsset: 0
@@ -215,7 +219,7 @@ Light:
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
-  m_ShadowAngle: 0
+  m_ShadowAngle: 25.8
 --- !u!4 &170076735
 Transform:
   m_ObjectHideFlags: 0
@@ -416,17 +420,16 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1930141999983968, guid: 900cbd554c855d042bc0da3c31db11a3, type: 2}
+      propertyPath: m_TagString
+      value: Throwable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 900cbd554c855d042bc0da3c31db11a3, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &765543860 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1930141999983968, guid: 900cbd554c855d042bc0da3c31db11a3,
-    type: 2}
-  m_PrefabInternal: {fileID: 730086770}
---- !u!54 &765543864 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 54887821753862812, guid: 900cbd554c855d042bc0da3c31db11a3,
     type: 2}
   m_PrefabInternal: {fileID: 730086770}
 --- !u!114 &765543868
@@ -450,12 +453,12 @@ MonoBehaviour:
   beingCarriedRotationY: 0
   beingCarriedRotationZ: 0
   beingCarriedRotationW: 90
-  cardBody: {fileID: 765543864}
+  beingCarriedLocationX: 0
+  beingCarriedLocationY: -0.25
+  beingCarriedLocationZ: 0.5
   playerPos: {fileID: 1988147799}
   playerInteractRange: {x: 0, y: 0, z: 0}
   playerCam: {fileID: 1908205985}
-  cardCount: 0
-  touched: 0
 --- !u!1001 &776096155
 Prefab:
   m_ObjectHideFlags: 0
@@ -614,7 +617,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: f7be6201946cacf4c9368c1c2c4508c2, type: 3}
@@ -651,14 +654,14 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1499507237}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8dbe442512e2734408e8c98e366af512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
   holdDownTime: 0
-  throwForce: 100
+  throwForce: 200
   throwTorque: 130
   objectDistance: 0
   windAffect: 0
@@ -666,12 +669,12 @@ MonoBehaviour:
   beingCarriedRotationY: 0
   beingCarriedRotationZ: 0
   beingCarriedRotationW: 0
-  cardBody: {fileID: 1499507242}
+  beingCarriedLocationX: 0
+  beingCarriedLocationY: -0.25
+  beingCarriedLocationZ: 0.5
   playerPos: {fileID: 1988147799}
   playerInteractRange: {x: 0, y: 0, z: 0}
   playerCam: {fileID: 1908205985}
-  cardCount: 0
-  touched: 0
 --- !u!1001 &1550125158
 Prefab:
   m_ObjectHideFlags: 0
