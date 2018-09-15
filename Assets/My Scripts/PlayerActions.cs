@@ -36,7 +36,7 @@ public class PlayerActions : MonoBehaviour
     {
 
         CharacterMove();
-        //PickUpnThrow();
+        SprintCalc();
         CameraLook();
         ItemDistance();
     }
@@ -78,48 +78,18 @@ public class PlayerActions : MonoBehaviour
         player.SimpleMove(new Vector3(horiz, 0f, vert));
 
     }
-
-    //void PickUpnThrow()
-    //{
-
-
-
-    //    if (nearPlayer && Input.GetButtonDown("Use"))
-    //    {
-    //        GetComponent<Rigidbody>().isKinematic = true;
-    //        transform.parent = playerCam;
-    //        beingCarried = true;
-
-    //    }
-    //    if (beingCarried)
-    //    {
-    //        if (touched)
-    //        {
-    //            GetComponent<Rigidbody>().isKinematic = false;
-    //            transform.parent = null;
-    //            beingCarried = false;
-    //            touched = false;
-
-    //        }
-    //        if (Input.GetMouseButtonDown(0))
-    //        {
-                
-    //            GetComponent<Rigidbody>().isKinematic = false;
-    //            transform.parent = null;
-    //            beingCarried = false;
-    //            GetComponent<Rigidbody>().AddForce(playerCam.forward * throwForce);
-    //        }
-    //        else if (Input.GetMouseButtonDown(1))
-    //        {
-    //            GetComponent<Rigidbody>().isKinematic = false;
-    //            transform.parent = null;
-    //            beingCarried = false;
-    //        }
-
-    //    }
-
-
-    //}
+    void SprintCalc()
+    {
+        if (Input.GetButton("Use"))
+            {
+            speed = 250.0f;
+        }
+        else
+        {
+            speed= 100.0f;
+        }
+    }
+    
 }
 
 

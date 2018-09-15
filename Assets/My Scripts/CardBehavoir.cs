@@ -44,7 +44,7 @@ public class CardBehavoir : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         PickUpnThrow();
     }
@@ -83,20 +83,21 @@ public class CardBehavoir : MonoBehaviour
 
 
 
-        if (nearPlayer && Input.GetButtonDown("Use"))
+        if (nearPlayer && Input.GetMouseButtonDown(1))
         {
-            GetComponent<Rigidbody>().isKinematic = true;
-            transform.parent = playerCam;
             
-            transform.localPosition = new Vector3(beingCarriedLocationX, beingCarriedLocationY, beingCarriedLocationZ);
-            transform.localRotation = new Quaternion(beingCarriedRotationX, beingCarriedRotationY, beingCarriedRotationZ, beingCarriedRotationW);
-
+            GetComponent<Rigidbody>().isKinematic = true;
+            transform.parent = playerCam;        
+                   
             beingCarried = true;
             
 
         }
         if (beingCarried)
         {
+            transform.localPosition = new Vector3(beingCarriedLocationX, beingCarriedLocationY, beingCarriedLocationZ);
+            transform.localRotation = new Quaternion(beingCarriedRotationX, beingCarriedRotationY, beingCarriedRotationZ, beingCarriedRotationW);
+
             //this drops the item if it comes in contact with another item.
             if (touched)
             {
@@ -111,9 +112,24 @@ public class CardBehavoir : MonoBehaviour
                 GetComponent<Rigidbody>().isKinematic = false;
                     transform.parent = null;
                     beingCarried = false;
-                    //the throwing calculation
-                    GetComponent<Rigidbody>().AddForce(playerCam.forward * throwForce);
-                    GetComponent<Rigidbody>().AddTorque(transform.forward * throwTorque);
+                //the throwing calculation
+                GetComponent<Rigidbody>().AddForce(playerCam.forward * throwForce);
+                
+
+
+                //the throwing item's tag determines the throwing pattern. the knife needs work
+                if (gameObject.tag == "Knife")
+                {
+                    GetComponent<Rigidbody>().AddTorque(transform.up * throwTorque * Time.deltaTime);
+                    GetComponent<Rigidbody>().AddForce(playerCam.up * throwForce / 2.0f);
+                }
+                if (gameObject.tag == "Card")
+                GetComponent<Rigidbody>().AddTorque(transform.forward * throwTorque * Time.deltaTime);
+                
+                if (gameObject.tag == "Star")
+                {
+                    GetComponent<Rigidbody>().AddTorque(transform.up * throwTorque * Time.deltaTime);                }
+                
                 //the wind affect calculation
                 //GetComponent<Rigidbody>().AddForce(playerCam.forward * throwForce);
                 //GetComponent<Rigidbody>().AddTorque(transform.up * 1); 
