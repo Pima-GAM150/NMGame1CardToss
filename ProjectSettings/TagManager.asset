@@ -9,6 +9,10 @@ TagManager:
   - Throwable
   - Knife
   - Star
+  - AirCard
+  - EarthCard
+  - FireCard
+  - IceCard
   layers:
   - Default
   - TransparentFX
