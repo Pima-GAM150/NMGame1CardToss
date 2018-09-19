@@ -1250,7 +1250,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_SkinWidth: 0.01
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 4300004, guid: 1deae1f7338c5e84e80e873129793a01, type: 3}
 --- !u!65 &65553320619818724
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -1292,7 +1292,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c08c094c4d294954d961b3625561aea9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  playerObject: {fileID: 0}
+  frozenTime: 0
 --- !u!137 &137056577222520748
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
