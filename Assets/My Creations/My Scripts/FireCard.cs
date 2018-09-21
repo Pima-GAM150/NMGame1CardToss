@@ -98,7 +98,7 @@ public class FireCard : MonoBehaviour {
                     //the throwing calculation
                     GetComponent<Rigidbody>().AddForce(playerCam.forward * throwForce);
                     GetComponent<Rigidbody>().AddForce(playerCam.forward * throwForce / 2);
-                    GetComponent<Rigidbody>().AddTorque(transform.forward * throwTorque * Time.deltaTime);
+                    GetComponent<Rigidbody>().AddTorque(playerCam.transform.forward * throwTorque * Time.deltaTime);
                     GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
                 }
 
@@ -114,8 +114,12 @@ public class FireCard : MonoBehaviour {
         if (CardStick.gameObject.tag == "Target")
         {
             Instantiate(fireEffect, CardStick.transform.position, Quaternion.identity);
-            
+        }
+        if (CardStick.gameObject.tag == "Crate")
+        {
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 
         }
+
     }
 }

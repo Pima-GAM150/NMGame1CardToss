@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 143636632422651190}
   - component: {fileID: 54680091372428432}
   - component: {fileID: 136528192888652426}
+  - component: {fileID: 114700448399708030}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -73,7 +74,7 @@ Transform:
   - {fileID: 4143097163051326}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 121.005005, z: 0}
 --- !u!20 &20751815856262010
 Camera:
   m_ObjectHideFlags: 1
@@ -136,6 +137,18 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1049367439985758}
   m_Enabled: 1
+--- !u!114 &114700448399708030
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1785997496493800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 164a554dd4943d345ad3581b04803e78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneIndex: 1
 --- !u!114 &114804253139018824
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -147,8 +160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa2dca1166755748a5daca2862a45db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
-  holdDownTime: 0
+  walkSpeed: 100
+  sprintSpeed: 350
   throwForce: 0
   player: {fileID: 143636632422651190}
   playerPos: {fileID: 4478316362919458}
@@ -156,6 +169,7 @@ MonoBehaviour:
   nearPlayer: 0
   cardCount: 0
   touched: 0
+  itemToThrow: {fileID: 0}
   cameraMovement: {fileID: 4143097163051326}
 --- !u!136 &136528192888652426
 CapsuleCollider:

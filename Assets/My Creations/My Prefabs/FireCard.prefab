@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1092b39cf4de18418b21d4f6fe1583f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwForce: 100
+  throwForce: 200
   throwTorque: 150
   objectDistance: 0
   carryRotationX: 90
@@ -160,5 +160,6 @@ MonoBehaviour:
   carryLocationX: 0
   carryLocationY: -0.25
   carryLocationZ: 0.5
+  fireEffect: {fileID: 0}
   playerPos: {fileID: 0}
   playerCam: {fileID: 0}

@@ -5,22 +5,23 @@ using UnityEngine;
 public class FallingLidScript : MonoBehaviour {
 
     public Transform lid;
-    Rigidbody lidBody;
+    public Rigidbody lidBody;
 
 
 
 	// Use this for initialization
 	void Start () {
-        lid = GetComponent<Transform>();
-        lidBody = GetComponent<Rigidbody>();
+        //lid = GetComponent<Transform>();
+        //lidBody = GetComponent<Rigidbody>();
         lidBody.isKinematic = false;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         if (lid.rotation.x == 0)
         {
-            lidBody.isKinematic = true;
+            
         }
 
 	}

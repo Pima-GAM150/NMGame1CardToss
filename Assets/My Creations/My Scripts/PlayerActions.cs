@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class PlayerActions : MonoBehaviour
 {
+    
 
     // Movement Variables
-    public float speed;
-    public float holdDownTime;
+    public float walkSpeed;
+    public float sprintSpeed;
+    float currentSpeed;
+    
     public float throwForce;
     public CharacterController player;
     //variables for pick up and throw
@@ -26,9 +29,8 @@ public class PlayerActions : MonoBehaviour
 
     void Start()
     {
-        nearPlayer = false;
-
-        
+        currentSpeed = walkSpeed;
+        nearPlayer = false;        
     }
 
 
@@ -38,23 +40,13 @@ public class PlayerActions : MonoBehaviour
         CharacterMove();
         SprintCalc();
         CameraLook();
-        ItemDistance();
+        FindItemDistance();
     }
 
-        void ItemDistance()
+        void FindItemDistance()
         {
-
-            //distance between player and card
-            float distance = Vector3.Distance(gameObject.transform.position, playerPos.position);
-        if (distance <= 2.5f)
-        {
-
-            nearPlayer = true;
-        }
-        else
-        {
-            nearPlayer = false;
-        }
+        itemToThrow = GameObject.Find("");
+        
         }
           
     void CameraLook()
@@ -72,21 +64,23 @@ public class PlayerActions : MonoBehaviour
 
     void CharacterMove()
     {
-        float horiz = Input.GetAxis("Horizontal") * Time.deltaTime * speed;
-        float vert = Input.GetAxis("Vertical") * Time.deltaTime * speed;
+        float horiz = Input.GetAxis("Horizontal") * Time.deltaTime * currentSpeed;
+        float vert = Input.GetAxis("Vertical") * Time.deltaTime * currentSpeed;
+        Vector3 localMotion = playerCam.transform.TransformDirection(new Vector3(horiz, 0f, vert));
+        
 
-        player.SimpleMove(new Vector3(horiz, 0f, vert));
+        player.SimpleMove(localMotion);
 
     }
     void SprintCalc()
     {
         if (Input.GetButton("Use"))
             {
-            speed = 250.0f;
+            currentSpeed = sprintSpeed;
         }
         else
         {
-            speed= 100.0f;
+            currentSpeed= walkSpeed;
         }
     }
     

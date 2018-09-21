@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class AirCard : MonoBehaviour {
 
-    
+    public PlayerActions playerScript;
+
     
     public float throwForce;
     public float throwTorque;

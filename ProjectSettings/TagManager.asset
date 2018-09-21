@@ -13,6 +13,7 @@ TagManager:
   - EarthCard
   - FireCard
   - IceCard
+  - Crate
   layers:
   - Default
   - TransparentFX

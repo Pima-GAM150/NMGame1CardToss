@@ -17,8 +17,13 @@ public class Target : MonoBehaviour {
 	}
     void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.tag == "FireCard")
+        {
+            
+
+        }
         
         
-        //stuckItem.constraints = RigidbodyConstraints.FreezePosition;
+       
     }
 }
