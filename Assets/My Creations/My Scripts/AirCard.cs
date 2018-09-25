@@ -72,14 +72,33 @@ public class AirCard : MonoBehaviour {
 
 
 
-        if (nearPlayer && Input.GetMouseButtonDown(1))
+        if (nearPlayer && Input.GetMouseButton(1))
         {
 
-            GetComponent<Rigidbody>().isKinematic = true;
-            transform.parent = playerCam;
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.rigidbody != null)
+                {
+                    
+                    GetComponent<Rigidbody>().isKinematic = true;
+                    GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
+                    transform.parent = playerCam;
+                    beingCarried = true;
+                    primed = true;
+                }
+                else
+                {
+                    GetComponent<Rigidbody>().isKinematic = false;
+                    beingCarried = false;
+                }
+            }
+            else
+            {
+                beingCarried = false;
 
-            beingCarried = true;
-            primed = true;
+            }
 
         }
         if (beingCarried)
@@ -103,7 +122,8 @@ public class AirCard : MonoBehaviour {
                 transform.parent = null;
                 beingCarried = false;
                 //the throwing calculation
-                GetComponent<Rigidbody>().AddForce(playerCam.forward * throwForce);                       
+                GetComponent<Rigidbody>().AddForce(playerCam.forward * throwForce);
+                GetComponent<Rigidbody>().AddForce(playerCam.up * throwForce / 6);
                 GetComponent<Rigidbody>().AddTorque(transform.forward * throwTorque * Time.deltaTime);               
                 GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
             }
@@ -114,6 +134,7 @@ public class AirCard : MonoBehaviour {
 
 
     }
+        
     
     private void OnTriggerEnter(Collider CardStick)
     {
@@ -122,6 +143,15 @@ public class AirCard : MonoBehaviour {
             Vector3 spot = CardStick.gameObject.transform.position;
             
             CardStick.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, spot, explosionRadius, explosionUplift);
+            
+        }
+    }
+
+    private void OnTriggerExit(Collider CardStick)
+    {
+        if (CardStick.gameObject.tag == "Target"&& primed == true)
+        {
+            primed = false;
         }
     }
 

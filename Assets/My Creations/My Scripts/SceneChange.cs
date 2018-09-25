@@ -21,5 +21,15 @@ public class SceneChange : MonoBehaviour {
         {
             SceneManager.LoadScene(sceneIndex);
         }
+
+        if (gameObject == null)
+        {
+            SceneManager.LoadScene(sceneIndex);
+        }
+
 	}
+    private void OnTriggerEnter(Collider other)
+    {
+        
+    }
 }

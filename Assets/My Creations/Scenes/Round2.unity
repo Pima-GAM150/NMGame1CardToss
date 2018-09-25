@@ -258,6 +258,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: a4486f08aacc4ea47a0b8704a5df90e0,
     type: 2}
   m_PrefabInternal: {fileID: 1597026254}
+--- !u!114 &178457327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 178457326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d4cb0dbbf40ba74bac8f4bce7e615f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneIndex: 2
+  time: 0
 --- !u!54 &178457330
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -792,11 +805,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 22
       objectReference: {fileID: 0}
-    - target: {fileID: 114700448399708030, guid: d413073daf5ea984ead9fc6c1d877f7d,
-        type: 2}
-      propertyPath: sceneIndex
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d413073daf5ea984ead9fc6c1d877f7d, type: 2}
   m_IsPrefabAsset: 0
@@ -993,6 +1001,11 @@ Prefab:
       propertyPath: playerCam
       value: 
       objectReference: {fileID: 1902799605}
+    - target: {fileID: 114249693066367902, guid: 300f94ba70abfc0489ca0d61369fade9,
+        type: 2}
+      propertyPath: fireEffect
+      value: 
+      objectReference: {fileID: 198690, guid: 18faec2a14493684d905501076799765, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 300f94ba70abfc0489ca0d61369fade9, type: 2}
   m_IsPrefabAsset: 0
@@ -1922,7 +1935,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: a4486f08aacc4ea47a0b8704a5df90e0, type: 2}
       propertyPath: m_TagString
-      value: Crate
+      value: Target
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4486f08aacc4ea47a0b8704a5df90e0, type: 2}

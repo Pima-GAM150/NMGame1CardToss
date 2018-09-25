@@ -41,6 +41,7 @@ public class PlayerActions : MonoBehaviour
         SprintCalc();
         CameraLook();
         FindItemDistance();
+        
     }
 
         void FindItemDistance()
@@ -84,6 +85,13 @@ public class PlayerActions : MonoBehaviour
         }
     }
     
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "MyZombie")
+        {
+            gameObject.GetComponent<CapsuleCollider>().isTrigger = false;
+        }
+    }
 }
 
 

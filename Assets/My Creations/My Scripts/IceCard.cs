@@ -67,18 +67,30 @@ public class IceCard : MonoBehaviour
 
         if (nearPlayer && Input.GetMouseButtonDown(1))
         {
+            RaycastHit hit;
+            Ray ray = playerCam.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.rigidbody != null)
+                {
 
-            GetComponent<Rigidbody>().isKinematic = true;
-            transform.parent = playerCam;
+                    GetComponent<Rigidbody>().isKinematic = true;
+                    transform.parent = playerCam;
+                    beingCarried = true;
+                    GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
+                }
+                else
+                {
+                    GetComponent<Rigidbody>().isKinematic = false;
+                    beingCarried = false;
+                }
 
-            beingCarried = true;
-
-
+            }
         }
 
             if (beingCarried)
             {
-
+           
                 transform.localPosition = new Vector3(carryLocationX, carryLocationY, carryLocationZ);
                 transform.localRotation = new Quaternion(carryRotationX, carryRotationY, carryRotationZ, carryRotationW);
 

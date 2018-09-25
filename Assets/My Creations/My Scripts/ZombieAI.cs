@@ -8,6 +8,7 @@ public class ZombieAI : MonoBehaviour {
     static Animator anim;
 
     Transform player;
+    public float distanceToPlayer; 
     public float frozenTime;
     bool frozen = false;
 	
@@ -34,7 +35,7 @@ public class ZombieAI : MonoBehaviour {
         //find player
 
 
-        float distanceToPlayer = Vector3.Distance(player.position, transform.position);
+        distanceToPlayer = Vector3.Distance(player.position, transform.position);
 
         if (distanceToPlayer < 15)
         {
@@ -51,6 +52,7 @@ public class ZombieAI : MonoBehaviour {
                 anim.SetBool("isWalking", true);
                 anim.SetBool("isAttacking", false);
                 anim.SetBool("isHit", false);
+               
             }
             else
             {
@@ -69,7 +71,6 @@ public class ZombieAI : MonoBehaviour {
 
     }
 
-    
 
     void FreezeTimerStart()
     {

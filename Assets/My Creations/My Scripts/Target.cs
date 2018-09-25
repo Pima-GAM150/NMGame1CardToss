@@ -1,29 +1,59 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class Target : MonoBehaviour {
+public class Target : MonoBehaviour
+{
 
-    //Rigidbody stuckItem;
+    public Transform playerCam;
+    public int sceneIndex;
+    bool nearPlayer;
 
-	// Use this for initialization
-	void Start () {
-     
-    }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-    void OnTriggerEnter(Collider other)
+  
+
+    // code for round1 objective player just picks up or clicks on the box
+    void Update()
     {
-        if (other.gameObject.tag == "FireCard")
-        {
-            
+        DistanceCheck();
+        PickUpCheck();
 
+    }
+
+    void DistanceCheck()
+    {
+        float distance = Vector3.Distance(gameObject.transform.position, playerCam.position);
+        if (distance <= 2.5f)
+        {
+            nearPlayer = true;
         }
-        
-        
-       
+        else
+        {
+            nearPlayer = false;
+        }
+    }
+
+    void PickUpCheck()
+    {
+        if (nearPlayer == true && Input.GetMouseButtonDown(1))
+        {
+            RaycastHit hit;
+            Ray ray = playerCam.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.rigidbody.gameObject.tag == "Objective")
+                {
+                    SceneManager.LoadScene(sceneIndex);
+                }
+                else
+                {
+
+
+                }
+
+            }
+        }
     }
 }
+
+

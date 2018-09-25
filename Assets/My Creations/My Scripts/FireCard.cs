@@ -65,12 +65,22 @@ public class FireCard : MonoBehaviour {
 
         if (nearPlayer && Input.GetMouseButtonDown(1))
         {
+            RaycastHit hit;
+            Ray ray = playerCam.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit))
+                if (hit.rigidbody != null)
+                {
 
-            GetComponent<Rigidbody>().isKinematic = true;
-            transform.parent = playerCam;
-
-            beingCarried = true;
-
+                    GetComponent<Rigidbody>().isKinematic = true;
+                    transform.parent = playerCam;
+                    beingCarried = true;
+                    GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
+                }
+                else
+                {
+                    GetComponent<Rigidbody>().isKinematic = false;
+                    beingCarried = false;
+                }
         }
 
             if (beingCarried)
@@ -120,6 +130,7 @@ public class FireCard : MonoBehaviour {
             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 
         }
+        
 
     }
 }
