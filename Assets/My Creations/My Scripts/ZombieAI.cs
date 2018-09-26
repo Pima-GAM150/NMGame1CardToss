@@ -10,65 +10,126 @@ public class ZombieAI : MonoBehaviour {
     Transform player;
     public float distanceToPlayer; 
     public float frozenTime;
+    public float fireTime;
+    public float earthDownTime;
+
+    public bool onFire = false;
     bool frozen = false;
+    public bool earthHit = false;
 	
 	void Start () {
+
         anim = GetComponent<Animator>();
         
         frozenTime = 0.0f;
+        fireTime = 0.0f;
+        earthDownTime = 0.0f;
 
-        playerObject = GameObject.Find("Player");
+        ZombieFindPlayer();
 
-        player = playerObject.GetComponent<Transform>();        
-        
 	}
 
     
     void Update()
     {
-        MainZombieFunction();
+        if (player == null)
+        {
+            if (onFire == true)
+            {
+                ZombieFallsOnBackAnimation();
+                fireTime += Time.deltaTime;
+                if (fireTime >= 5.0f)
+                {
+                    GetComponent<BoxCollider>().isTrigger = true;
+                    if (fireTime >= 6.0f)
+
+                    {
+                        Destroy(gameObject);
+                    }
+
+
+                }
+            }
+
+
+            if (earthHit == true)
+            {
+                ZombieFallsOnBackAnimation();
+                earthDownTime += Time.deltaTime;
+
+                if (earthDownTime >= 5f)
+                {
+                    anim.SetBool("isHit", false);
+                    anim.SetBool("isIdol", true);
+                    anim.SetBool("isWalking", false);
+                    anim.SetBool("isAttacking", false);
+                    earthHit = false;
+                    earthDownTime = 0f;
+                    ZombieFindPlayer();
+                    MainZombieFunction();
+
+                }
+            }
+
+
+            //if the zombie hasnt been hit by anything but has lost the play for some reason. the zombie will stand still.
+            else
+            {
+                anim.SetBool("isHit", false);
+                anim.SetBool("isIdol", true);
+                anim.SetBool("isWalking", false);
+                anim.SetBool("isAttacking", false);
+
+            }
+        }
+        // if the player object isnt null then it will do the main function
+        else
+        {
+            MainZombieFunction();
+        }
+
+       
+        
+            
+
+
     }
 
+    void ZombieFindPlayer()
+    {
+        playerObject = GameObject.Find("Player");
+        player = playerObject.GetComponent<Transform>();
+    }
 
     void MainZombieFunction()
     {
-        //find player
-
-
+        //find player 
+        
         distanceToPlayer = Vector3.Distance(player.position, transform.position);
+        
 
-        if (distanceToPlayer < 15)
+        if (distanceToPlayer < 20)
         {
             Vector3 directToPlayer = player.position - transform.position;
             directToPlayer.y = 0;
-
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(directToPlayer), 0.1f);
 
             anim.SetBool("isIdol", false);
             anim.SetBool("isHit", false);
 
-            if (directToPlayer.magnitude > 4)
+            if (directToPlayer.magnitude > 3)
             {
-                anim.SetBool("isWalking", true);
-                anim.SetBool("isAttacking", false);
-                anim.SetBool("isHit", false);
-               
+                ZombieWalkingAnimation();
             }
             else
             {
-                anim.SetBool("isAttacking", true);
-                anim.SetBool("isWalking", false);
-                anim.SetBool("isHit", false);
+                ZombieAttackAnimation();
             }
         }
         else
         {
-            anim.SetBool("isIdol", true);
-            anim.SetBool("isWalking", false);
-            anim.SetBool("isAttacking", false);
-            anim.SetBool("isHit", false);
+            ZombieIdolAnimation();
         }
-
     }
 
 
@@ -100,11 +161,7 @@ public class ZombieAI : MonoBehaviour {
         //earthcard knocks down zombie
         if (other.gameObject.tag == "EarthCard")
         {
-            anim.SetBool("isHit", true);
-            anim.SetBool("isIdol", false);
-            anim.SetBool("isWalking", false);
-            anim.SetBool("isAttacking", false);
-            player = null;
+            EarthCardHit();            
         }
 
         //ice card will freeze zombie
@@ -122,14 +179,9 @@ public class ZombieAI : MonoBehaviour {
         //firecard will burn the zombie by creating a fire prefab and destory zombie.
         if (other.gameObject.tag == "FireCard")
         {
-            player = null;
-            anim.SetBool("isIdol", false);
-            anim.SetBool("isWalking", false);
-            anim.SetBool("isAttacking", false);
-            anim.SetBool("isHit", true);
-
-
+            FireCardHit();
         }
+
     }
 
     //these are the effects of cards, icecard first
@@ -150,16 +202,55 @@ public class ZombieAI : MonoBehaviour {
     void FrozenZombie()
     {
         gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
-
-        anim.SetBool("isHit", false);
-        anim.SetBool("isIdol", true);
-        anim.SetBool("isWalking", false);
-        anim.SetBool("isAttacking", false);
+        ZombieIdolAnimation();       
 
 
     }
 
+   void FireCardHit()
+    {  
+    
+        onFire = true;
+        player = null;
+        
+    
+    }
 
+    void EarthCardHit()
+    {
+        earthHit = true;
+    }
+
+
+    void ZombieFallsOnBackAnimation()
+    {
+        anim.SetBool("isHit", true);
+        anim.SetBool("isIdol", false);
+        anim.SetBool("isWalking", false);
+        anim.SetBool("isAttacking", false);
+    }
+
+    void ZombieWalkingAnimation()
+    {
+        anim.SetBool("isWalking", true);
+        anim.SetBool("isAttacking", false);
+        anim.SetBool("isHit", false);
+        anim.SetBool("isIdol", false);
+    }
+    void ZombieAttackAnimation()
+    {
+        anim.SetBool("isAttacking", true);
+        anim.SetBool("isWalking", false);
+        anim.SetBool("isHit", false);
+        anim.SetBool("isIdol", false);
+    }
+    void ZombieIdolAnimation()
+    {
+        anim.SetBool("isIdol", true);
+        anim.SetBool("isWalking", false);
+        anim.SetBool("isAttacking", false);
+        anim.SetBool("isHit", false);
+    }
 
 }
 

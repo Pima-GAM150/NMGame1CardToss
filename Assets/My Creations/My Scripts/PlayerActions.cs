@@ -87,7 +87,7 @@ public class PlayerActions : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "MyZombie")
+        if (other.gameObject.tag == "Zombie")
         {
             gameObject.GetComponent<CapsuleCollider>().isTrigger = false;
         }

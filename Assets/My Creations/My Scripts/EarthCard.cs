@@ -17,10 +17,11 @@ public class EarthCard : MonoBehaviour {
     public float carryLocationX;
     public float carryLocationY;
     public float carryLocationZ;
-        
-    
+
+
     //public CharacterController player;
     // variables for pick up and throw
+    public GameObject playerObject;
     public Transform playerPos;
     public Vector3 playerInteractRange;
     public Transform playerCam;
@@ -35,7 +36,8 @@ public class EarthCard : MonoBehaviour {
 
     void Start()
     {
-
+        FindPlayer();
+       
         nearPlayer = false;
 
     }
@@ -46,6 +48,12 @@ public class EarthCard : MonoBehaviour {
         PickUpnThrow();
     }
 
+    void FindPlayer()
+    {
+        playerObject = GameObject.Find("Player");
+        playerPos = playerObject.transform;
+        playerCam = playerObject.transform.Find("Camera");
+    }
 
     void PickUpnThrow()
     {
@@ -54,7 +62,6 @@ public class EarthCard : MonoBehaviour {
         float distance = Vector3.Distance(gameObject.transform.position, playerPos.position);
         if (distance <= 5.0f)
         {
-
             nearPlayer = true;
         }
         else
@@ -106,27 +113,9 @@ public class EarthCard : MonoBehaviour {
                     beingCarried = false;
                     //the throwing calculation
                     GetComponent<Rigidbody>().AddForce(playerCam.forward * throwForce);
-                    GetComponent<Rigidbody>().AddForce(playerCam.forward * throwForce / 2);
-
-
-
-                    //the throwing item's tag determines the throwing pattern. the knife needs work
-                    if (gameObject.tag == "Knife")
-                    {
-                        GetComponent<Rigidbody>().AddTorque(transform.up * throwTorque * Time.deltaTime);
-                        GetComponent<Rigidbody>().AddForce(playerCam.up * throwForce / 2.0f);
-                    }
-                    if (gameObject.tag == "Card")
-                        GetComponent<Rigidbody>().AddTorque(transform.forward * throwTorque * Time.deltaTime);
-
-                    if (gameObject.tag == "Star")
-                    {
-                        GetComponent<Rigidbody>().AddTorque(transform.up * throwTorque * Time.deltaTime);
-                    }
-
-                    //the wind affect calculation
-                    //GetComponent<Rigidbody>().AddForce(playerCam.forward * throwForce);
-                    //GetComponent<Rigidbody>().AddTorque(transform.up * 1); 
+                    GetComponent<Rigidbody>().AddForce(playerCam.up * throwForce / 2);
+                GetComponent<Rigidbody>().AddTorque(playerCam.up * throwTorque);
+                
                     GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
                 }
 

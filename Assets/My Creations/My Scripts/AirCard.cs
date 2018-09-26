@@ -29,6 +29,7 @@ public class AirCard : MonoBehaviour {
 
     //public CharacterController player;
     // variables for pick up and throw
+    public GameObject playerObject;
     public Transform playerPos;
     public Vector3 playerInteractRange;
     public Transform playerCam;
@@ -43,7 +44,7 @@ public class AirCard : MonoBehaviour {
 
     void Start()
     {
-
+        FindPlayer();
         nearPlayer = false;
 
     }
@@ -53,7 +54,13 @@ public class AirCard : MonoBehaviour {
     {
         PickUpnThrow();
     }
-    
+
+    void FindPlayer()
+    {
+        playerObject = GameObject.Find("Player");
+        playerPos = playerObject.transform;
+        playerCam = playerObject.transform.Find("Camera");
+    }
 
     void PickUpnThrow()
     {

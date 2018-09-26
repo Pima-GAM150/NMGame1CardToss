@@ -22,6 +22,7 @@ public class FireCard : MonoBehaviour {
 
     //public CharacterController player;
     // variables for pick up and throw
+    public GameObject playerObject;
     public Transform playerPos;
     public Transform playerCam;
     //public Quaternion cardRot;
@@ -35,7 +36,7 @@ public class FireCard : MonoBehaviour {
 
     void Start()
     {
-
+        FindPlayer();
         nearPlayer = false;
 
     }
@@ -46,6 +47,12 @@ public class FireCard : MonoBehaviour {
         PickUpnThrow();
     }
 
+    void FindPlayer()
+    {
+        playerObject = GameObject.Find("Player");
+        playerPos = playerObject.transform;
+        playerCam = playerObject.transform.Find("Camera");
+    }
 
     void PickUpnThrow()
     {
@@ -121,15 +128,17 @@ public class FireCard : MonoBehaviour {
 
     private void OnTriggerEnter(Collider CardStick)
     {
-        if (CardStick.gameObject.tag == "Target")
+        if (CardStick.gameObject.tag == "Zombie")
         {
             Instantiate(fireEffect, CardStick.transform.position, Quaternion.identity);
         }
         if (CardStick.gameObject.tag == "Crate")
         {
+            Instantiate(fireEffect, CardStick.transform.position, Quaternion.identity);
             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 
         }
+
         
 
     }
