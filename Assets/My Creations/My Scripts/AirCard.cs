@@ -141,18 +141,27 @@ public class AirCard : MonoBehaviour {
 
 
     }
-        
-    
+
+
     private void OnTriggerEnter(Collider CardStick)
     {
         if (CardStick.gameObject.tag == "Target" && primed == true)
         {
             Vector3 spot = CardStick.gameObject.transform.position;
-            
+
             CardStick.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, spot, explosionRadius, explosionUplift);
-            
+
+        }
+        if (CardStick.gameObject.tag == "Crate" && primed == true)
+        {
+            Vector3 spot = CardStick.gameObject.transform.position;
+
+            CardStick.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, spot, explosionRadius, explosionUplift);
+
+
         }
     }
+
 
     private void OnTriggerExit(Collider CardStick)
     {

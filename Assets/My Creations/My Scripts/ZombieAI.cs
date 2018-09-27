@@ -88,8 +88,8 @@ public class ZombieAI : MonoBehaviour {
             MainZombieFunction();
         }
 
-       
-        
+
+        FreezeTimerCheck();
             
 
 
@@ -133,7 +133,7 @@ public class ZombieAI : MonoBehaviour {
     }
 
 
-    void FreezeTimerStart()
+    void FreezeTimerCheck()
     {
         if (frozen == true)
         {
@@ -184,7 +184,7 @@ public class ZombieAI : MonoBehaviour {
 
     }
 
-    //these are the effects of cards, icecard first
+    //these are the effects of cards, icecard first this actually works correctly if only had a frozen shader
     void IceCardHit()
     {
         frozen = true;
@@ -193,11 +193,21 @@ public class ZombieAI : MonoBehaviour {
         {
             FrozenZombie();
             player = null;
-            FreezeTimerStart();
-            
-        }
+            frozenTime += Time.deltaTime;
 
+        }
+        if (frozenTime >= 6.0f)
+        {
+            gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            player = playerObject.GetComponent<Transform>();
+            frozenTime = 0.0f;
+            frozen = false;
+            MainZombieFunction();
+        }
     }
+
+
+
 
     void FrozenZombie()
     {
@@ -208,12 +218,27 @@ public class ZombieAI : MonoBehaviour {
     }
 
    void FireCardHit()
-    {  
-    
+    {      
         onFire = true;
-        player = null;
+
+        if (onFire == true)
+        {
+            ZombieFallsOnBackAnimation();
+            player = null;
+            fireTime += Time.deltaTime;
+        }
+
+        if (fireTime >= 5.0f)
+        {
+            GetComponent<BoxCollider>().isTrigger = true;
+            if (fireTime >= 6.0f)
+                {
+                    Destroy(gameObject);
+                }
+
+            }
         
-    
+
     }
 
     void EarthCardHit()

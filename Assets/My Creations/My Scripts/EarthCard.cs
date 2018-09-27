@@ -7,7 +7,7 @@ public class EarthCard : MonoBehaviour {
     public float throwForce;
     public float throwTorque;
     public float objectDistance;
-    public float windAffect;
+    public float power;
 
     public float carryRotationX;
     public float carryRotationY;
@@ -126,10 +126,9 @@ public class EarthCard : MonoBehaviour {
 
     private void OnTriggerEnter(Collider CardStick)
     {
-        if (CardStick.gameObject.tag == "Target")
-        {
-            
-            
+        if (CardStick.gameObject.tag == "Zombie")
+        {            
+
         }
     }
 

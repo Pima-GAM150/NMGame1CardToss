@@ -488,6 +488,7 @@ GameObject:
   - component: {fileID: 114009521693441192}
   - component: {fileID: 65775247496821940}
   - component: {fileID: 136379705995586704}
+  - component: {fileID: 136932630485770646}
   m_Layer: 0
   m_Name: MyZombie
   m_TagString: Zombie
@@ -1103,7 +1104,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1863911128809286}
   m_LocalRotation: {x: -0, y: 0.73956776, z: -0, w: -0.6730822}
-  m_LocalPosition: {x: 392.08, y: 0, z: 114.21}
+  m_LocalPosition: {x: 129.19383, y: 0.0000009536743, z: 376.74686}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4532238987293936}
@@ -1282,7 +1283,9 @@ MonoBehaviour:
   distanceToPlayer: 0
   frozenTime: 0
   fireTime: 0
+  earthDownTime: 0
   onFire: 0
+  earthHit: 0
 --- !u!136 &136379705995586704
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -1296,6 +1299,19 @@ CapsuleCollider:
   m_Height: 1.7692719
   m_Direction: 1
   m_Center: {x: 0.008495629, y: 0.9304426, z: 7.471607e-11}
+--- !u!136 &136932630485770646
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1863911128809286}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5425637
+  m_Height: 2.4790645
+  m_Direction: 1
+  m_Center: {x: 0.009140012, y: 0.739532, z: 0.39272812}
 --- !u!137 &137056577222520748
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
